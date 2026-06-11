@@ -8,7 +8,7 @@ export default function Page() {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [videos, setVideos] = useState([]);
   const PLAYLIST_ID = "PL7FyP3s7bLbIT57CCMR42gxPeN851i8DZ";
-  const API_KEY = "AIzaSyBHSv6fT10HfnWHE1NoZhP0j_rU3QV385I";
+  const API_KEY = "AIzaSyCmedAQ0QW5xgWr9fEikkAI7nKE3xYcPMc";
 
   const fetchVideos = async () => {
     try {
@@ -40,16 +40,9 @@ export default function Page() {
   };
 
   useEffect(() => {
-    // Initial fetch
+    // Fetch the playlist once on load. Playlists rarely change, and a 24/7
+    // kiosk re-polling drains the YouTube Data API quota for no benefit.
     fetchVideos();
-
-    // Set up interval to fetch videos every 30 minutes
-    const interval = setInterval(() => {
-      fetchVideos();
-    }, 60 * 60 * 1000); // 60 minutes in milliseconds
-
-    // Cleanup interval on component unmount
-    return () => clearInterval(interval);
   }, []);
 
   const handleVideoClick = (vid) => {
