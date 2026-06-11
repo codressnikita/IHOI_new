@@ -39,9 +39,6 @@ jobs:
         with:
           components: rustfmt
 
-      - name: Install Tauri CLI Dependencies
-        run: npm install @tauri-apps/cli @tauri-apps/api
-
       - name: Build the App
         run: npm run tauri build
         env:
